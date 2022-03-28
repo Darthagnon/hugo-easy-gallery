@@ -1,0 +1,4 @@
+[params]
+	# Choose whether to load JS/CSS remotely from a CDN or locally
+	CDNJS = false
+	
