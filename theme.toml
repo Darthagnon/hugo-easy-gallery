@@ -1,7 +1,7 @@
 name = "Easy Gallery"
 license = "MIT"
 licenselink = "https://github.com/liwenyip/hugo-easy-gallery/blob/master/LICENCE.md"
-description = "Automagical css image gallery in Hugo using shortcodes, with optional lightbox/carousel gadget using PhotoSwipe and jQuery."
+description = "Automagical CSS image gallery in Hugo using shortcodes, with optional lightbox/carousel gadget using PhotoSwipe."
 homepage = "https://github.com/liwenyip/hugo-easy-gallery"
 min_version = "0.79.0"
 
