@@ -12,7 +12,7 @@ Documentation and licence at https://github.com/liwenyip/hugo-easy-gallery/
 -->
 
 <!-- Photoswipe css/js libraries -->
-{{ if .Site.Params.CDNJS }}
+{{ with .Site.Params.CDNJS }}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.css" integrity="sha256-LWdHSKWG7zv3DTpee8YAgoTfkj3gNkfauF624h4P2Nw=" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/default-skin/default-skin.min.css" integrity="sha256-Q9bBMw/rHRRag46GDWY84J3elDNc8JJjKXL9tIC4oe8=" crossorigin="anonymous" />
 {{- else -}}
