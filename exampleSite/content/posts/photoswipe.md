@@ -17,7 +17,7 @@ draft: false
 
 <!--more-->
 
-Update 25/03/2017: I’ve combined this PhotoSwipe implementation with a shortcode that generates a responsive css gallery of all the images in a directory - see [Hugo Easy Gallery](/heg).
+Update 25/03/2017: I’ve combined this PhotoSwipe implementation with a shortcode that generates a responsive css gallery of all the images in a directory - see [Hugo Easy Gallery](/posts/heg).
 
 There are various solutions for implementing [PhotoSwipe](http://photoswipe.com/) in [Hugo](https://gohugo.io/), including [HugoPhotoSwipe](https://github.com/GjjvdBurg/HugoPhotoSwipe) and [Tom Helmer’s blog post](http://www.thehome.dk/article/photoswipe-gallery-hugo/), but they all require you group all your images in the once place on the page.
 
