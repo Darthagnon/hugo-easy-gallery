@@ -70,22 +70,23 @@ If you want, you could (depending on a front matter param) conditionally load `l
 
 ## Theme integration
 
-Put files in the relevant folders within your theme.
+Feel free to use Hugo Easy Gallery to add Photoswipe to your Hugo themes! Tell us about them so we can list them here! Here's how you do it:
 
-Delete `/layouts/shortcodes/load-photoswipe.html`.
+1. Merge the files into the relevant folders within your theme:
+	- `myTheme/static/css/{files from hugo-easy-gallery}`
+	- `myTheme/static/js/{files from hugo-easy-gallery}`
+	- `myTheme/layouts/shortcodes/{files from hugo-easy-gallery}`
 
-Rename `/layouts/shortcodes/load-photoswipe-theme.html` to `/layouts/shortcodes/load-photoswipe.html`.
+2. Move `/layouts/shortcodes/load-photoswipe.html` to `/layouts/partials/load-photoswipe.html`.
 
-Add the following lines to the footer of your template, just before `</body>`:
+3. Add the following line to `myTheme/layouts/_default/baseof.html`, just before the closing `</body>` tag:
 
 ```html
-<!-- Load PhotoSwipe js if the load-photoswipe shortcode has been used -->
-{{ if ($.Scratch.Get "photoswipeloaded") }}
-<script src="/js/load-photoswipe.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
-{{ end }}
+	{{ partial "load-photoswipe" }}
+</body>
 ```
+
+Hugo Easy Gallery and Photoswipe will now be loaded on every page on your website; call the `{{< figure >}}` and `{{< gallery >}}` shortcodes anywhere!
 
 ## `{{< figure >}}` shortcode usage
 
