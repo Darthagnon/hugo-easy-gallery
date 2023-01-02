@@ -1,24 +1,12 @@
-# hugo-easy-gallery
+# hugo-easy-gallery 🖼 
+### This fork is currently maintained by [Darthagnon](https://github.com/Darthagnon) ([homepage]), associate of Flukey and [Mesh Infrasoft](https://www.meshinfrasoft.com/).
 
-**2022-02-28 - Help wanted:**  Unfortunately I am no longer able to maintain this project myself (I have a busy day job that has nothing to do with web development or computer coding, and any spare time is taken up with family + other committments) so I am looking for collaborators to help maintain this project i.e. review and merge pull requests and help with issues. Thanks to [Kishor Bhat](https://github.com/kishorbhat) and [Emiel Hollander](https://github.com/EmielH]) who have already generously volunteered. We could use a few more collaborators - please email me if you're interested :-)
+Automagical css image gallery in [Hugo](https://gohugo.io/) using shortcodes, with optional lightbox/carousel gadget using [PhotoSwipe] and **no jQuery** or other frameworks.
 
+## Screenshot
 
-Automagical css image gallery in [Hugo](https://gohugo.io/) using shortcodes, with optional lightbox/carousel gadget using [PhotoSwipe](http://photoswipe.com/) and jQuery.
+![screenshot](/screenshot.png)
 
-**New:** Create a gallery of all images in a directory with just one line of shortcode, see [demo](https://www.liwen.id.au/heg/#gallery-usage).
-
-**Need help?**
-- Post your question at https://github.com/liwenyip/hugo-easy-gallery/issues.
-- Include a link to a test page that demonstrates the issue you are having
-- Include your source code for the test page
-- Please be patient (As mentioned above I am no longer maintaining this project but others will hopefully be able to help you)
-
-**Fixed an issue or made an improvement?**
-- Please submit a pull request
-- Include a link to a test page
-- Include your source code for the test page
-- Please be patient (As mentioned above I am no longer maintaining this project, but someone will review and maintain your PR, eventually!)
-- Consider volunteering to help maintain this project :-)
 
 ## Demo
 
@@ -27,6 +15,7 @@ Automagical css image gallery in [Hugo](https://gohugo.io/) using shortcodes, wi
 
 ## Image Gallery Features
 
+- Create a gallery of all images in a directory with just one line of shortcode, see [demo](https://www.liwen.id.au/heg/#gallery-usage): `{{< gallery dir="/img/your-directory-of-images/" />}}`
 - Custom `{{< figure >}}` shortcode that enables new features but is backwards-compatible with Hugo's built-in `{{< figure >}}`shortcode
 - Use the `{{< figure >}}` shortcode by itself to enable pretty captions
 - Put multiple `{{< figure >}}` shortcodes inside a `{{< gallery >}}` to create a pretty image gallery
@@ -36,6 +25,7 @@ Automagical css image gallery in [Hugo](https://gohugo.io/) using shortcodes, wi
 - Optionally make gallery images zoom, grow, shrink, slide up, or slide down upon hover
 - Only requires 3.6kB of CSS (unminified; you can minify it if you want)
 - CSS is automatically loaded the first time you use the `{{< figure >}}` shortcode on each page
+- **Coming soon:** Automatic thumbnail generation from image resources via [Hugo image processing](https://gohugo.io/content-management/image-processing/)
 
 ## PhotoSwipe Features
 
@@ -43,30 +33,38 @@ Automagical css image gallery in [Hugo](https://gohugo.io/) using shortcodes, wi
 - Loads all of the `<figure>` elements in your post, regardless of where in your post they appear, into a lightbox/carousel style image gallery
 - Works with any existing `<figure>` elements/shortcodes in your posts
 - Does not require you to [pre-define the image sizes](http://photoswipe.com/documentation/faq.html#image-size) (the initialisation script pre-loads the image to determine its size; you can optionally pre-define the image size if you want to avoid this pre-loading)
-- Loads PhotoSwipe js and css libraries from `cdnjs.cloudflare.com`
+- Loads PhotoSwipe js and css libraries locally or from `cdnjs.cloudflare.com` (specify `CDNJS= true` in `config.toml/[Params]`
 
 ## Installation
 ### As a Theme
-Check out this repo into your `themes/` folder:
+**(1)** Check out this repo into your `themes/` folder:
 
 ```
 git submodule add git@github.com:liwenyip/hugo-easy-gallery.git themes/easy-gallery
 ```
 
-Then update your `./config.toml` to load the theme, for example:
+**(2)** Then update your `./config.toml` to load the theme, for example:
 
 ```
-theme = ["hugo-coder", "easy-gallery"]
+theme = ["hugo-coder", "hugo-easy-gallery"]
 ```
 
 ### Manual Installation
-Put files in following places:
+Click the big green `Code` button at the top of this page, then `Download ZIP` and extract it to your `themes/` folder.
 
-- /layouts/shortcodes/figure.html
-- /layouts/shortcodes/gallery.html
-- /layouts/shortcodes/load-photoswipe.html
-- /static/js/load-photoswipe.js
-- /static/css/hugo-easy-gallery.css
+**Or**, put files in following places:
+
+- `/layouts/shortcodes/figure.html`
+- `/layouts/shortcodes/gallery.html`
+- `/layouts/shortcodes/load-photoswipe.html`
+- `/static/js/load-photoswipe.js`
+- `/static/css/hugo-easy-gallery.css`
+
+Then, update your `./config.toml` to load the theme, for example:
+
+```
+theme = ["hugo-coder", "hugo-easy-gallery"]
+```
 
 If you want, you could (depending on a front matter param) conditionally load `load-photoswipe.html` or its contents from the footer of your template.  But I've consciously chosen to load PhotoSwipe using a shortcode so that you don't have to modify your template if you don't want to.
 
@@ -116,6 +114,8 @@ To specify a directory of image files:
 ```
 {{< gallery dir="/img/your-directory-of-images/" />}}
 ```
+
+**Don't forget the closing forward slash before the end Hugo brackets `/>}}`!!!**
 
 - The images are automatically captioned with the file name.
 - `[image].jpg` is used for the hi-res image, and `[image]-thumb.jpg` is used for the thumbnails.
@@ -180,12 +180,41 @@ Here are some pointers if you want to adapt the CSS:
 
 ## Issues
 
-I've tested this with the [beautifulhugo](https://github.com/halogenica/beautifulhugo) theme. If things don't work properly with other themes, raise an issue on GitHub, or even better fix the issue and submit a pull request :-)
+This module has been tested with the [beautifulhugo](https://github.com/halogenica/beautifulhugo) theme. If things don't work properly with other themes, raise an issue on GitHub, or even better fix the issue and submit a pull request :-)
+
+### Need help?
+- Post your question in **[Issues](https://github.com/Darthagnon/hugo-easy-gallery/issues)**, or contact Darth via his [homepage].
+- Include a link to a test page that demonstrates the issue you are having
+	- We recommended hosting for free with [GitHub Pages](https://pages.github.com/) and building site based off the Hugo themes [blank](https://github.com/vimux/blank) or [plain](https://github.com/Darthagnon/hugo-plain-theme) with Hugo Easy Gallery added.
+- Include your source code for the test page
+- Please be patient; the [original project](https://github.com/liwenyip/hugo-easy-gallery) is kinda dead, and we are maintining this part-time...
+
+### Fixed an issue or made an improvement?
+- Please submit a **[pull request](https://github.com/Darthagnon/hugo-easy-gallery/pulls)**
+- Include a link to a test page
+- Include your source code for the test page
+- Consider volunteering to help maintain this project :-)
 
 ## Credits
 
-These blog posts helped me immensely:
+These blog posts helped original author Li-Wen Yip immensely:
 
 - http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/
 - http://www.thehome.dk/article/photoswipe-gallery-hugo/
 - https://webdesign.tutsplus.com/tutorials/the-perfect-lightbox-using-photoswipe-with-jquery--cms-23587
+
+Many thanks to [Li-Wen Yip](https://www.liwen.id.au/), the **original author** of [Hugo Easy Gallery](https://github.com/liwenyip/hugo-easy-gallery), who retired from maintaining it 2022-02-28 due to other commitments and family. Without him, this project wouldn't exist; may he live long and prosper! His blog posts were very informative, and have been included as [exampleSite](/exampleSite) material:
+- https://www.liwen.id.au/heg/
+- https://www.liwen.id.au/photoswipe/
+
+Thanks to [Kishor Bhat](https://github.com/kishorbhat) and [Emiel Hollander](https://github.com/EmielH), volunteer collaborators.
+
+Thanks to [Dmytro Semenov](https://github.com/dimsemenov), the [PhotoSwipe] author.
+
+Thanks to the [BeautifulHugo theme](https://github.com/halogenica/beautifulhugo) authors, who maintained compatibility and provided example code for this module.
+
+Thanks to [the many community members who have contributed pull requests and issues to the original project](https://github.com/liwenyip/hugo-easy-gallery/pulls) 
+
+
+[PhotoSwipe]: https://photoswipe.com/
+[homepage]: https://robot-one.github.io/
