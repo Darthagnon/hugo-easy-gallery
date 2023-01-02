@@ -1,4 +1,6 @@
 [params]
+	# Toggle console logging of resources loaded
+	debug= true
 	# Choose whether to load JS/CSS remotely from a CDN or locally
 	CDNJS = false
 	
