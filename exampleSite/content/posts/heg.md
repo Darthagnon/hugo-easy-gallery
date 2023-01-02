@@ -21,12 +21,12 @@ Hugo Easy Gallery makes Hugo image galleries easy. [Get the code and documentati
 
 ## Create gallery from a directory
 ```
-{{</* gallery dir="/img/arduino/" */>}} {{</* /gallery */>}} {{</* load-photoswipe */>}}
+{{</* gallery dir="/img/arduino/" /*/>}} {{</* load-photoswipe */>}}
 ```
 
-Don't forget to close the `/gallery` tag, or you'll break the webpage. You can call `load-photoswipe` anywhere on the page (it doesn't have to be before or after anything in particular).
+**Don't forget to close the `gallery` tag with a forward slash before the Hugo brackets `/>))` or by calling `{{</* /gallery */>}}` afterwards!!!** You can call `load-photoswipe` anywhere on the page (it doesn't have to be before or after anything in particular)
 
-{{< gallery dir="/img/arduino/" >}} {{< /gallery >}} {{< load-photoswipe >}}
+{{< gallery dir="/img/arduino/" />}} {{< load-photoswipe >}}
 
 Notes:
 
