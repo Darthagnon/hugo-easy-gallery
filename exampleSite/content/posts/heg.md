@@ -21,11 +21,12 @@ Hugo Easy Gallery makes Hugo image galleries easy. [Get the code and documentati
 
 ## Create gallery from a directory
 ```
-{{</* gallery dir="/img/arduino/" */>}} {{</* load-photoswipe */>}}
+{{</* gallery dir="/img/arduino/" */>}} {{</* /gallery */>}} {{</* load-photoswipe */>}}
 ```
 
-<!-- do not uncomment the gallery thing below, or it breaks the page; everything else works. Dunno why. jQuery version mismatch? EDIT: Doesn't load necessary CSS for some reason-->
-{{</* gallery dir="/img/arduino/" */>}} {{< load-photoswipe >}}
+Don't forget to close the `/gallery` tag, or you'll break the webpage. You can call `load-photoswipe` anywhere on the page (it doesn't have to be before or after anything in particular).
+
+{{< gallery dir="/img/arduino/" >}} {{< /gallery >}} {{< load-photoswipe >}}
 
 Notes:
 
