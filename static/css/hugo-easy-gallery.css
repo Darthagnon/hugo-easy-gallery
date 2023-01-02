@@ -80,6 +80,11 @@ figure {
     transform: translateY(-5px);
 }
 
+/* Force square grid (from Bootstrap v3.7.7) */
+figure {
+  margin: 0;
+}
+
 /*
 img / a styles
 */
@@ -165,4 +170,10 @@ figure figcaption a {
     position: relative;
     color: #CCC;
     /* text-decoration: none; */
+}
+
+/* Format figure captions and Photoswipe text (from Bootstrap v3.7.7) */
+figcaption, .pswp__caption__center, .pswp__counter, .pswp__share-tooltip {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
 }
