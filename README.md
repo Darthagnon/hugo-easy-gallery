@@ -40,7 +40,8 @@ Automagical css image gallery in [Hugo](https://gohugo.io/) using shortcodes, wi
 **(1)** Check out this repo into your `themes/` folder:
 
 ```
-git submodule add git@github.com:liwenyip/hugo-easy-gallery.git themes/easy-gallery
+git submodule add https://github.com/Darthagnon/hugo-easy-gallery.git themes/easy-gallery
+git submodule init
 ```
 
 **(2)** Then update your `./config.toml` to load the theme, for example:
