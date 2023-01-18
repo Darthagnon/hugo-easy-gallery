@@ -1,5 +1,5 @@
 # hugo-easy-gallery 🖼 
-### This fork is currently maintained by [Darthagnon](https://github.com/Darthagnon) ([homepage]), associate of Flukey and [Mesh Infrasoft](https://www.meshinfrasoft.com/).
+### This fork is currently maintained by [Darthagnon] ([homepage]), associate of Flukey and [Mesh Infrasoft](https://www.meshinfrasoft.com/).
 
 Automagical css image gallery in [Hugo](https://gohugo.io/) using shortcodes, with optional lightbox/carousel gadget using [PhotoSwipe] and **no jQuery** or other frameworks.
 
@@ -7,11 +7,13 @@ Automagical css image gallery in [Hugo](https://gohugo.io/) using shortcodes, wi
 
 ![screenshot](/screenshot.png)
 
-
 ## Demo
 
 - Feature demonstration at https://www.liwen.id.au/heg/
 - Real-life example at https://www.liwen.id.au/arduino-rf-codes/
+- Production usage by [iroQuai](https://github.com/iroQuai) at https://buurlandutrecht.nl/buurtinbeeld/ ; features a creative example of a grid gallery that links to other pages in Hugo (see also [/exampleSite/buurtinbeeld.md](/exampleSite/buurtinbeeld.md), copied from his [website source](https://raw.githubusercontent.com/iroQuai/buurlandutrecht.nl/main/content/buurtinbeeld/_index.md))
+- Production usage by maintainer [Darthagnon] on websites he manages: https://robot-one.github.io/, https://dragonsnotincluded.com/
+
 
 ## Image Gallery Features
 
@@ -219,4 +221,5 @@ Thanks to [the many community members who have contributed pull requests and iss
 
 
 [PhotoSwipe]: https://photoswipe.com/
+[Darthagnon]: https://github.com/Darthagnon
 [homepage]: https://robot-one.github.io/
