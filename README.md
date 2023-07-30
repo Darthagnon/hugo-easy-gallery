@@ -42,7 +42,7 @@ Automagical css image gallery in [Hugo](https://gohugo.io/) using shortcodes, wi
 **(1)** Check out this repo into your `themes/` folder:
 
 ```
-git submodule add https://github.com/Darthagnon/hugo-easy-gallery.git themes/easy-gallery
+git submodule add https://github.com/Darthagnon/hugo-easy-gallery.git themes/hugo-easy-gallery
 git submodule init
 ```
 
