@@ -80,14 +80,14 @@ Documentation and licence at https://github.com/liwenyip/hugo-easy-gallery/
 					}, 30);
 				}
 				// Save the index of this image then add it to the array
-				items.push(item);
+				var pswpLength = items.push(item);  // returns new length of the array
 				// Event handler for click on a figure
 				$figure.addEventListener('click', function(event) {
 					event.preventDefault();  // prevent the normal behaviour i.e. load the <a> hyperlink
 					// Get the PSWP element and initialize it with the desired options
 					var $pswp = document.querySelector('.pswp');
 					var options = {
-						index: index,
+						index: pswpLength-1,  // real index is length-1
 						bgOpacity: 0.8,
 						showHideOpacity: true,
 						showHideAnimationType: 'zoom',
