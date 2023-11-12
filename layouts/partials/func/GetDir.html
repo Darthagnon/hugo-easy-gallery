@@ -4,8 +4,15 @@
 <!-- If a directory was specified, generate figures for all of the images in the directory -->
 {{- $files := readDir $.pathImages }}
 {{- range $files -}}
+	{{- if .IsDir }}
+		{{/*  Do the same thing again  */}}
+		{{ $pathImages := (path.Join $.pathImages  .Name) }}
+		{{ $directory := (path.Join $.directory  .Name) }}
+		{{ partial "func/GetDir.html" (dict "thumb" $.thumb "directory" $directory "pathImages" $pathImages "baseUrl" $.baseUrl) }}
+	{{- else }}
 		{{ 
 			partial "func/GetFile.html" 
 			(dict "thumb" $.thumb "directory" $.directory "baseUrl" $.baseUrl "pathImages" $.pathImages "Name" .Name "files" $files) 
 		}}  
+	{{- end }}
 {{- end }}
