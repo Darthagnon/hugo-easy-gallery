@@ -1,0 +1,11 @@
+{{/*  Debugging  */}}
+{{/*  <pre>{{ jsonify (dict "indent" "  ") . }}</pre> */}}
+
+<!-- If a directory was specified, generate figures for all of the images in the directory -->
+{{- $files := readDir $.pathImages }}
+{{- range $files -}}
+		{{ 
+			partial "func/GetFile.html" 
+			(dict "thumb" $.thumb "directory" $.directory "baseUrl" $.baseUrl "pathImages" $.pathImages "Name" .Name "files" $files) 
+		}}  
+{{- end }}
