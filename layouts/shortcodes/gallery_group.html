@@ -1,0 +1,32 @@
+<!--
+Put this file in /layouts/shortcodes/gallery_group.html
+Documentation and licence at https://github.com/liwenyip/hugo-easy-gallery/
+-->
+<!-- count how many times we've called this shortcode; load the css if it's the first time -->
+{{- if not ($.Page.Scratch.Get "figurecount") }}<link rel="stylesheet" href={{ "css/hugo-easy-gallery.css" | relURL }} />{{ end }}
+{{- $.Page.Scratch.Add "figurecount" 1 }}
+{{ $baseURL := .Site.BaseURL }}
+{{ $thumb := .Get "thumb" | default "-thumb"}}
+
+{{ $localScope := . }}
+
+{{- with (.Get "dir") -}}
+{{ $parentDir := . }}
+{{ $pathImages := (path.Join "/static" .) }}
+{{- $files := readDir $pathImages }}
+{{- range $files -}}
+            <h3> {{ .Name }} </h3>
+            {{ $directories :=  path.Join $parentDir .Name }}
+            {{ $localPath :=  path.Join $pathImages .Name }}
+            {{ partial "gallery_box_open_div.html" $localScope }}
+            {{/*  atm (20231112) there is no feature, that allows "inner partials" so we have to close the open div on our own  */}}
+            {{ partial "func/GetDir.html" (dict "thumb" $thumb "directory" $directories "pathImages" $localPath "baseUrl" $baseURL) }}</div>  
+    {{- end}}
+</div>
+
+{{- else -}}
+<div class="gallery caption-position-{{ with .Get "caption-position" | default "bottom" }}{{.}}{{end}} caption-effect-{{ with .Get "caption-effect" | default "slide" }}{{.}}{{end}} hover-effect-{{ with .Get "hover-effect" | default "zoom" }}{{.}}{{end}} {{ if ne (.Get "hover-transition") "none" }}hover-transition{{end}}" itemscope itemtype="http://schema.org/ImageGallery">
+    <!-- If no directory was specified, include any figure shortcodes called within the gallery -->
+    {{ .Inner }}
+</div>
+{{- end }}
