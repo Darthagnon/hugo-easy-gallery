@@ -1,0 +1,35 @@
+{{/*  Debugging  */}}
+{{/*  <pre>{{ jsonify (dict "indent" "  ") . }}</pre>  */}}
+
+
+{{ $baseURL := .baseUrl }}
+{{ $pathImages := .pathImages }}
+{{ $directory := .directory }}
+{{ $files := $.files }}
+
+
+{{- $thumbext := $.thumb }}
+	{{- $isthumb := .Name | findRE ($thumbext | printf "%s\\.") }}<!-- is the current file a thumbnail image? -->
+	{{- $isimg := lower .Name | findRE "\\.(gif|jpg|jpeg|tiff|png|bmp|webp|avif|jxl)" }}<!-- is the current file an image? -->
+	
+
+	{{- if and $isimg (not $isthumb) }}
+		{{/*  Find a file with .md or .txt for description  */}}
+		{{- $caption :=  .Name | replaceRE "\\..*" "" | humanize }}<!-- humanized filename without extension -->
+
+		{{- $linkURL := print $baseURL $directory "/" .Name |  absURL }} <!-- absolute URL to hi-res image -->
+		{{- $thumb := .Name | replaceRE "(\\.)" ($thumbext | printf "%s.") }}<!-- filename of thumbnail image -->
+		{{- $thumbexists := where $files "Name" $thumb }}<!-- does a thumbnail image exist? --> 
+		{{- $thumbURL := print $baseURL ($directory) "/" $thumb | absURL }}<!-- absolute URL to thumbnail image -->
+		<div class="box">
+			<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+			<div class="img" style="background-image: url('{{ if $thumbexists }}{{ $thumbURL }}{{ else }}{{ $linkURL }}{{ end }}');" >
+				<img itemprop="thumbnail" src="{{ if $thumbexists }}{{ $thumbURL }}{{ else }}{{ $linkURL }}{{ end }}" alt="{{ $caption }}" /><!-- <img> hidden if in .gallery -->
+			</div>
+			<figcaption>
+			<p>{{ $caption }}</p>
+			</figcaption>
+			<a href="{{ $linkURL }}" itemprop="contentUrl"></a><!-- put <a> last so it is stacked on top -->
+			</figure>
+		</div>
+	{{- end }}
