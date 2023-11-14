@@ -1,16 +1,37 @@
-        {{- $captionFileMd :=  .Name | replaceRE "\\..*" ".md" }}  
-		{{- $captionFileTxt := .Name | replaceRE "\\..*" ".txt" }}  
+		{{- $useNameAsFallback :=  .useNameAsFallback | default true }}  
+
+		{{- $captionFileMd :=  .Name }}
+		{{- $captionFileTxt := .Name }}
+		{{- $hasExtension :=  .Name | findRE "\\..*" | len }}
+		{{- if (ne $hasExtension  0) }}
+			{{- $captionFileMd  = $captionFileMd | replaceRE "\\..*" ".md" }}  
+			{{- $captionFileTxt = $captionFileTxt | replaceRE "\\..*" ".txt" }}  
+		{{- else }}
+			{{- $captionFileMd  = print $captionFileMd ".md" }}  
+			{{- $captionFileTxt = print $captionFileTxt ".txt" }}  
+		{{- end }}
 		{{- $absPathCaptionMd := path.Join .pathImages $captionFileMd }} 
 		{{- $absPathCaptionTxt := path.Join .pathImages $captionFileTxt }} 
 		{{- $captionFileMdE := os.FileExists $absPathCaptionMd }} 
 		{{- $captionFileTxtE := os.FileExists $absPathCaptionTxt }} 
 		
+		
+		{{/*  <pre>{{ debug.Dump $captionFileMd }}</pre>
+		<pre>{{ debug.Dump $captionFileMdE }}</pre>
+		<pre>{{ debug.Dump $captionFileTxt }}</pre>
+		<pre>{{ debug.Dump $captionFileTxtE }}</pre>
+		<pre>{{ debug.Dump $absPathCaptionMd }}</pre>
+		<pre>{{ debug.Dump $absPathCaptionTxt }}</pre>  */}}
+
+
 		{{$caption := ""}}
 		{{- if  $captionFileMdE }}  
 			{{ $caption = os.ReadFile $absPathCaptionMd}}
 		{{- else if $captionFileTxtE }} 
 			{{ $caption = os.ReadFile $absPathCaptionTxt}}
 		{{- else  }}
-			{{- $caption =  .Name | replaceRE "\\..*" "" | humanize }}<!-- humanized filename without extension -->
+			{{- if $useNameAsFallback}}
+				{{- $caption =  .Name | replaceRE "\\..*" "" | humanize }}<!-- humanized filename without extension -->
+			{{- end}}
 		{{- end }}  
         {{ return $caption }}
