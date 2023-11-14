@@ -15,21 +15,7 @@
 
 	{{- if and $isimg (not $isthumb) }}
 		{{/*  Find a file with .md or .txt for description  */}}
-		{{- $captionFileMd :=  .Name | replaceRE "\\..*" ".md" }}  
-		{{- $captionFileTxt := .Name | replaceRE "\\..*" ".txt" }}  
-		{{- $absPathCaptionMd := path.Join $pathImages $captionFileMd }} 
-		{{- $absPathCaptionTxt := path.Join $pathImages $captionFileTxt }} 
-		{{- $captionFileMdE := os.FileExists $absPathCaptionMd }} 
-		{{- $captionFileTxtE := os.FileExists $absPathCaptionTxt }} 
-		
-		{{$caption := ""}}
-		{{- if  $captionFileMdE }}  
-			{{ $caption = os.ReadFile $absPathCaptionMd}}
-		{{- else if $captionFileTxtE }} 
-			{{ $caption = os.ReadFile $absPathCaptionTxt}}
-		{{- else  }}
-			{{- $caption =  .Name | replaceRE "\\..*" "" | humanize }}<!-- humanized filename without extension -->
-		{{- end }}  
+		{{ $caption := partial "func/GetDescription.html" (dict "Name" .Name "pathImages" $pathImages)  }}
 
 		{{- $linkURL := print $baseURL $directory "/" .Name |  absURL }} <!-- absolute URL to hi-res image -->
 		{{- $thumb := .Name | replaceRE "(\\.)" ($thumbext | printf "%s.") }}<!-- filename of thumbnail image -->
