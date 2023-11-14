@@ -1,0 +1,16 @@
+        {{- $captionFileMd :=  .Name | replaceRE "\\..*" ".md" }}  
+		{{- $captionFileTxt := .Name | replaceRE "\\..*" ".txt" }}  
+		{{- $absPathCaptionMd := path.Join .pathImages $captionFileMd }} 
+		{{- $absPathCaptionTxt := path.Join .pathImages $captionFileTxt }} 
+		{{- $captionFileMdE := os.FileExists $absPathCaptionMd }} 
+		{{- $captionFileTxtE := os.FileExists $absPathCaptionTxt }} 
+		
+		{{$caption := ""}}
+		{{- if  $captionFileMdE }}  
+			{{ $caption = os.ReadFile $absPathCaptionMd}}
+		{{- else if $captionFileTxtE }} 
+			{{ $caption = os.ReadFile $absPathCaptionTxt}}
+		{{- else  }}
+			{{- $caption =  .Name | replaceRE "\\..*" "" | humanize }}<!-- humanized filename without extension -->
+		{{- end }}  
+        {{ return $caption }}
