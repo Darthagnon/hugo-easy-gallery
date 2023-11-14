@@ -1,37 +1,35 @@
-		{{- $useNameAsFallback :=  .useNameAsFallback | default true }}  
-
-		{{- $captionFileMd :=  .Name }}
-		{{- $captionFileTxt := .Name }}
-		{{- $hasExtension :=  .Name | findRE "\\..*" | len }}
-		{{- if (ne $hasExtension  0) }}
-			{{- $captionFileMd  = $captionFileMd | replaceRE "\\..*" ".md" }}  
-			{{- $captionFileTxt = $captionFileTxt | replaceRE "\\..*" ".txt" }}  
-		{{- else }}
-			{{- $captionFileMd  = print $captionFileMd ".md" }}  
-			{{- $captionFileTxt = print $captionFileTxt ".txt" }}  
-		{{- end }}
-		{{- $absPathCaptionMd := path.Join .pathImages $captionFileMd }} 
-		{{- $absPathCaptionTxt := path.Join .pathImages $captionFileTxt }} 
-		{{- $captionFileMdE := os.FileExists $absPathCaptionMd }} 
-		{{- $captionFileTxtE := os.FileExists $absPathCaptionTxt }} 
-		
-		
-		{{/*  <pre>{{ debug.Dump $captionFileMd }}</pre>
-		<pre>{{ debug.Dump $captionFileMdE }}</pre>
-		<pre>{{ debug.Dump $captionFileTxt }}</pre>
-		<pre>{{ debug.Dump $captionFileTxtE }}</pre>
-		<pre>{{ debug.Dump $absPathCaptionMd }}</pre>
-		<pre>{{ debug.Dump $absPathCaptionTxt }}</pre>  */}}
+{{/*  Parameter   */}}
+{{- $useNameAsFallback :=  .useNameAsFallback | default true }}  
 
 
-		{{$caption := ""}}
-		{{- if  $captionFileMdE }}  
-			{{ $caption = os.ReadFile $absPathCaptionMd}}
-		{{- else if $captionFileTxtE }} 
-			{{ $caption = os.ReadFile $absPathCaptionTxt}}
-		{{- else  }}
-			{{- if $useNameAsFallback}}
-				{{- $caption =  .Name | replaceRE "\\..*" "" | humanize }}<!-- humanized filename without extension -->
-			{{- end}}
-		{{- end }}  
-        {{ return $caption }}
+{{- $descriptionFileMd :=  .Name }}
+{{- $descriptionFileTxt := .Name }}
+{{- $hasExtension :=  .Name | findRE "\\..*" | len }}
+
+{{/*  if file/foldername has a extension, replace it otherwise concat md or txt */}}
+{{- if (ne $hasExtension  0) }}
+	{{- $descriptionFileMd  = $descriptionFileMd | replaceRE "\\..*" ".md" }}  
+	{{- $descriptionFileTxt = $descriptionFileTxt | replaceRE "\\..*" ".txt" }}  
+{{- else }}
+	{{- $descriptionFileMd  = print $descriptionFileMd ".md" }}  
+	{{- $descriptionFileTxt = print $descriptionFileTxt ".txt" }}  
+{{- end }}
+
+{{/*  and check if there is a file  */}}
+{{- $absPathDescriptionMd := path.Join .pathImages $descriptionFileMd }} 
+{{- $absPathDescriptionTxt := path.Join .pathImages $descriptionFileTxt }} 
+{{- $descriptionFileMdExist := os.FileExists $absPathDescriptionMd }} 
+{{- $descriptionFileTxtExist := os.FileExists $absPathDescriptionTxt }} 
+
+{{$description := ""}}
+{{- if  $descriptionFileMdExist }}  
+	{{ $description = os.ReadFile $absPathDescriptionMd}}
+{{- else if $descriptionFileTxtExist }} 
+	{{ $description = os.ReadFile $absPathDescriptionTxt}}
+{{- else  }}
+	{{- if $useNameAsFallback}}
+		{{/*  Fallback if there is no description file  otherwise return empty string */}}
+		{{- $description =  .Name | replaceRE "\\..*" "" | humanize }}<!-- humanized filename without extension -->
+	{{- end}}
+{{- end }}  
+{{ return $description }}
