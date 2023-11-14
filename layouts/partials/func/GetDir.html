@@ -8,6 +8,10 @@
 		{{/*  Do the same thing again  */}}
 		{{ $pathImages := (path.Join $.pathImages  .Name) }}
 		{{ $directory := (path.Join $.directory  .Name) }}
+		{{ $description := partial "func/GetDescription.html" (dict "Name" "description" "pathImages" $pathImages "useNameAsFallback" false) }}
+		{{- if ne ($description | len) 0}}
+		 	<div class="hg-description"> {{ $description }} </div>  
+		{{- end }}
 		{{ partial "func/GetDir.html" (dict "thumb" $.thumb "directory" $directory "pathImages" $pathImages "baseUrl" $.baseUrl) }}
 	{{- else }}
 		{{ 
